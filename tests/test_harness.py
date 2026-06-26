@@ -13,6 +13,11 @@ import json
 import os
 import sys
 
+# Adiciona o diretório raiz do projeto ao PYTHONPATH para a importação de src
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.generator import generate_workout
+
 # Cores para exibição de resultados formatados
 GREEN = "\033[92m"
 YELLOW = "\033[93m"
@@ -320,8 +325,8 @@ def run_tests():
                 for f in required_input_fields:
                     assert f in user_input, f"Campo obrigatório de entrada ausente: {f}"
             
-            # 2. Geração do Treino pelo mock da IA
-            workout = mock_ai_generate_workout(case_id, user_input)
+            # 2. Geração do Treino pelo algoritmo real do CaliForge no /src/
+            workout = generate_workout(user_input)
 
             # 3. Validação Sintática da Saída
             if HAS_JSONSCHEMA:

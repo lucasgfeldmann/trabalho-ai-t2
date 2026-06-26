@@ -2,7 +2,7 @@
 
 Este repositório atua como um **Framework de Especificação (Spec Engine)**. O seu objetivo principal é estruturar o processo e o ciclo de vida pelos quais qualquer ideia de produto ou melhoria técnica deve passar antes de ser codificada em projetos futuros.
 
-O diretório `specs/` serve exclusivamente para a modelagem desse framework e documentação de especificações exemplares (como o **CaliForge** em `active_spec.md`). Portanto, **nenhum código de produção será gerado neste repositório**. No futuro, este framework servirá como uma Skill Customizada (`new-spec`) que impedirá os agentes de IA de iniciar qualquer desenvolvimento ou alteração em qualquer projeto sem que haja uma especificação formal previamente aprovada pelo usuário.
+O diretório `specs/` serve exclusivamente para a modelagem conceitual, prosa e documentação de especificações. É terminantemente proibido escrever ou gerar qualquer linha de código executável ou scripts dentro de `specs/`. A codificação da aplicação é uma atividade externa ao processo de especificação e só deve ser iniciada após as especificações serem homologadas e assinadas pelo usuário. No futuro, este framework servirá como uma Skill Customizada (`new-spec`) que impedirá os agentes de IA de iniciar qualquer desenvolvimento sem que haja uma especificação formal previamente aprovada pelo usuário.
 
 ---
 
@@ -38,7 +38,7 @@ graph TD
 
 Sempre que uma nova funcionalidade for discutida, a IA deve guiar o processo seguindo estas diretrizes:
 
-* **Código de Produção Zero (Rigor Estrito):** Nenhum código-fonte da aplicação (backend ou frontend) ou interfaces operáveis serão gerados pelas IAs até que todas as etapas de especificação (Etapas 1 a 5) estejam integralmente concluídas, validadas e aprovadas pelo usuário.
+* **Proibição Absoluta de Código em Specs:** Nenhuma linha de código de aplicação, lógica de desenvolvimento ou interfaces operáveis serão geradas dentro do diretório `specs/`. O processo de especificação neste diretório é estritamente conceitual e em prosa. O desenvolvimento do software é uma fase posterior e externa que só é liberada quando as especificações atingirem 100% de aprovação (Etapa 5 concluída no Harness e assinada).
 * **Não pular etapas:** Nunca comece a propor implementações ou telas de produção antes que a especificação atinja a aprovação completa.
 * **Desafio Ativo:** A IA deve atuar como um validador crítico, propondo pelo menos 2 cenários de falha ou "casos de borda" para cada novo requisito proposto pelo usuário.
 * **Harness Loop:** Antes de consolidar a especificação, as regras de negócio devem ser convertidas em assertions (asserções de teste) no dataset do Harness.

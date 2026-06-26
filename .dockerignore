@@ -1,0 +1,14 @@
+# Docker Ignore file
+.git
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.gemini/
+prompts.jsonl
+context.jsonl
+tasks.md
+README.md
+.agents/

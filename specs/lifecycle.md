@@ -3,7 +3,7 @@
 Este documento define o processo estruturado e as etapas de validação pelas quais o ciclo de vida de qualquer especificação passará. Usamos a especificação da calistenia (CaliForge) como o nosso caso de uso de referência para estruturar este framework.
 
 > [!IMPORTANT]
-> **Regra de Código de Produção Zero no Repositório:** Por ser um repositório focado puramente em infraestrutura de processo e design do ciclo de vida das especificações (Spec Engine), **nenhum código de produção operável (código-fonte de aplicativos, componentes ou lógica de frontend/backend) será escrito aqui**. Em projetos reais que utilizarem este framework via Skill, a codificação é proibida até que a especificação atinja a aprovação no Harness.
+> **Regra de Código de Produção Zero em Specs (Rigor Estrito):** Para garantir o rigor e a integridade do Spec-Driven Development, **nenhuma linha de código executável ou scripts da aplicação serão escritos dentro do diretório `specs/`**. O diretório `specs/` serve puramente para a modelagem em prosa e documentação conceitual de especificação. Qualquer codificação da aplicação deve ser feita fora deste diretório e apenas após o respectivo ciclo de vida de especificação ser concluído (Etapa 5 homologada no Harness e assinada).
 
 ---
 

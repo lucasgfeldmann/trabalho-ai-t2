@@ -69,6 +69,24 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
   * *Descrição:* Desenvolver o script de teste (`tests/test_harness.py`) contendo a lógica de validação automatizada e as asserções de qualidade do CaliForge (CA-001 a CA-004).
   * *Status:* 🟢 Concluído
 
+### 💻 Desenvolvimento da Aplicação (CaliForge Core em `/src/`)
+* **[x] [TSK-014] Estrutura Inicial e Contratos do `/src/`:**
+  * *Descrição:* Configurar o diretório `/src/` com as classes de domínio e mapeamento de tipos básicos baseados nos JSON Schemas.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-015] Implementação do Algoritmo de Geração e Reabilitação:**
+  * *Descrição:* Desenvolver a lógica real de geração de treinos, regras de sobrecarga progressiva, temporalidade de dores e pain lockout em `/src/`.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-016] Acoplamento do Harness ao Código de Produção:**
+  * *Descrição:* Substituir o mock do gerador no `tests/test_harness.py` pela chamada das funções reais do `/src/`, validando o produto final contra as asserções.
+  * *Status:* 🟢 Concluído
+
+### 🐳 Infraestrutura de Conteinerização (Docker)
+* **[x] [TSK-017] Configuração do Docker da Aplicação e Harness:**
+  * *Descrição:* Criar o `Dockerfile` e arquivos de apoio do Docker para executar o CaliForge e rodar a suite de testes de forma isolada em containers.
+  * *Status:* 🟢 Concluído
+
 ---
 
 ## 📜 Histórico de Tarefas Concluídas
@@ -111,6 +129,19 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
 
 * **[TSK-013] Implementação do Script do Harness (test_harness.py):**
   * *Decisão:* Desenvolvido o script `tests/test_harness.py` contendo a validação de JSON Schemas (com fallback resiliente sem bibliotecas externas) e a checagem das 4 asserções de segurança/consistência. Testes executados com sucesso e obtido status final 5/5 Verde ("TUDO VERDE").
+
+* **[TSK-017] Configuração do Docker da Aplicação e Harness:**
+  * *Decisão:* Criada a infraestrutura Docker (`Dockerfile`, `.dockerignore`, `requirements.txt`). Imagem `califorge-harness` compilada e executada com sucesso. A validação estrita via `jsonschema` (instalada via Docker) rodou com sucesso na avaliação dos 5 casos (5/5 verde), homologando a portabilidade do Harness.
+
+* **[TSK-014] Estrutura Inicial e Contratos do `/src/`:**
+  * *Decisão:* Criado o pacote `src/` com `__init__.py` e `src/models.py`. Implementadas classes com `dataclasses` para modelar os inputs e outputs do CaliForge, incluindo métodos estáticos `from_dict` que aplicam os fallbacks seguros descritos na Etapa 4 da especificação em caso de dados de entrada incompletos.
+
+* **[TSK-015] Implementação do Algoritmo de Geração e Reabilitação:**
+  * *Decisão:* Criado o arquivo `src/generator.py` contendo a função `generate_workout`. Ela faz o parsing da entrada com os fallbacks, resolve o foco muscular (reabilitando se dor no punho >= 3), aplica restrições de progressão de nível baseadas em consistência (< 2 treinos), garante que o volume de sustentação de empurrar/puxar no fullbody seja equilibrado e filtra equipamentos.
+
+* **[TSK-016] Acoplamento do Harness ao Código de Produção:**
+  * *Decisão:* Modificado o script de testes `tests/test_harness.py` para injetar o caminho do diretório raiz no `sys.path` e importar a função real `generate_workout` de `src.generator`. Executados os testes via Docker que resultaram em homologação total (5/5 verde), atestando a integridade física e sintática do motor de prescrições.
+
 
 
 
