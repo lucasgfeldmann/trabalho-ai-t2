@@ -22,18 +22,39 @@ graph LR
 Uma etapa só é considerada **concluída** quando todos os itens do seu checklist forem validados e aprovados pelo usuário.
 
 > [!IMPORTANT]
-> **Bloqueio por Perguntas Pendentes:** Nenhum item de checklist pode ser marcado como concluído e nenhuma passagem de etapa pode ser autorizada se houver perguntas correspondentes ativas e pendentes no tracker local **[questions.md](file:///home/lucas/github/trabalho-ai-t2/specs/questions.md)**. A IA é estritamente proibida de assumir premissas ou dar por respondidas questões sem a manifestação inequívoca do usuário.
+> **Bloqueio por Perguntas Pendentes e Regras de Assinatura de Checklists:**
+> A IA é estritamente proibida de marcar caixas de checklists de validação de etapas (mudar `- [ ]` para `- [x]`) ou autorizar passagens de fase sem que cumpra cumulativamente os seguintes portões de validação:
+> 1. **Consentimento Explícito:** Validação verbal explícita de aprovação por parte do usuário no chat (ex: *"concordo"*, *"aprovo"*, *"de acordo"*).
+> 2. **Questions Tracker Limpo:** Ausência total de perguntas ativas ou pendentes correspondentes àquela fase no arquivo **[questions.md](file:///home/lucas/github/trabalho-ai-t2/specs/questions.md)**.
+> 3. **Registro de Progresso:** Registro de auditoria do progresso e decisões de transição devidamente gravados no arquivo `context.jsonl` na raiz.
+>
+> A IA é estritamente proibida de assumir premissas ou dar por respondidas questões sem a manifestação inequívoca do usuário.
+
+---
+
+## ⚖️ Gestão de Densidade de Contexto e Escopo (Token Economy & Focus)
+
+Para evitar o crescimento descontrolado das especificações (token bloat) e garantir que os agentes de IA mantenham o foco absoluto nos requisitos prioritários, aplicamos duas regras de governança de escopo:
+
+1. **Triagem Ativa de Ideias e Bifurcações:**
+   - Sempre que novas ideias, casos de borda secundários ou extensões de domínio forem levantados, a IA deve questionar verbalmente o usuário se o item é **prioritário e essencial para o objetivo principal** ou se é uma **ideia secundária/futura**.
+   - **Mapeamento de Ideias Futuras:** Itens classificados como secundários **não** entram na especificação ativa. Eles são consolidados no arquivo [future-specs.md](file:///home/lucas/github/trabalho-ai-t2/specs/future-specs.md), onde são ordenados por relevância e mantidos como backlog estruturado para discussões futuras.
+
+2. **Protocolo de Modularização de Módulos Satélites:**
+   - Se uma regra ou subsistema prioritário exigir detalhamento profundo (ex: mais de 3 casos de borda complexos ou regras de negócio extensas), a especificação principal (como o [active_spec.md](file:///home/lucas/github/trabalho-ai-t2/specs/active_spec.md)) mapeará apenas a arquitetura geral e os contratos.
+   - O detalhamento exaustivo deve ser isolado em arquivos de módulos satélites sob o diretório `specs/modules/` (ex: `specs/modules/rehabilitation.md`), referenciados de forma limpa na especificação principal.
 
 ---
 
 ## 📌 Etapas do Ciclo de Vida
 
 ### 🏁 Etapa 1: Visão Geral e Escopo (Ideation & Product Vision)
-* **Objetivo:** Definir o público-alvo, personas, e o escopo funcional básico (Geração de Treinos, Progressão, Acompanhamento).
+* **Objetivo:** Definir o público-alvo, personas, o escopo funcional básico e a **Massa Crítica de Dados (Estado Mínimo)** necessária para o funcionamento de fluxos de dados incrementais.
 * **Checklist de Validação:**
   - [ ] Persona do usuário bem definida (iniciante vs. avançado).
   - [ ] Escopo funcional acordado (recursos indispensáveis vs. secundários).
   - [ ] Restrições físicas e de equipamentos mapeadas.
+  - [ ] Massa crítica (dados de entrada mínimos obrigatórios) definida formalmente para o caso de fluxos de coleta progressiva.
 
 ### 📐 Etapa 2: Modelo de Domínio e Progressão (Domain & Progressions)
 * **Objetivo:** Definir os exercícios de calistenia suportados, sua hierarquia de dificuldade (progressão) e regras de treino.
@@ -50,11 +71,13 @@ Uma etapa só é considerada **concluída** quando todos os itens do seu checkli
   - [ ] Planejamento de animações e micro-interações.
 
 ### 💾 Etapa 4: Esquemas de Dados e Contratos (Data Schema)
-* **Objetivo:** Formalizar as estruturas de entrada e saída (JSON Schemas) que o Agente de IA e o Harness usarão.
+* **Objetivo:** Formalizar as estruturas de entrada e saída (JSON Schemas) que o Agente de IA e o Harness usarão, definindo fallbacks de segurança e regras temporais para os dados.
 * **Checklist de Validação:**
   - [ ] Esquema JSON de Entrada (Perfil do Usuário, Equipamentos, Objetivo).
   - [ ] Esquema JSON de Saída (Estrutura do Treino Gerado).
   - [ ] Definição das validações sintáticas.
+  - [ ] Mapeamento e documentação de valores padrões seguros (fallbacks) para todos os parâmetros de dados opcionais ou incompletos.
+  - [ ] Definição do ciclo de vida, expiração e regras de decaimento para variáveis mutáveis ou dependentes do tempo (dados temporais).
 
 ### 🧪 Etapa 5: Critérios de Avaliação e Dataset do Harness
 * **Objetivo:** Definir os cenários de teste reais que o Harness rodará para avaliar a qualidade dos treinos gerados pela IA.
