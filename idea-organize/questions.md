@@ -17,24 +17,24 @@ Este arquivo serve para rastrear e gerenciar **toda e qualquer pergunta** feita 
 
 ## 📜 Histórico de Perguntas Respondidas
 
-* **[Q-009] Estratégia de Cobertura de Cenários no Dataset do Harness:**
-  * *Pergunta:* O dataset do Harness deve cobrir quais cenários específicos de usuários? Proponho testar 5 perfis básicos em active_spec.md: (1) Iniciante sem equipamentos com dor aguda no punho (nível 4); (2) Intermediário focado em Push/Pull com barra e paralelas; (3) Reabilitação de ombro (nível 2) e lombar (nível 1); (4) Usuário com consistência semanal baixa (volume reduzido); (5) Avançado com foco em pernas (pistol squat). Está de acordo com essa cobertura?
-  * *Resposta/Decisão:* Aprovado pelo usuário para cobrir os 5 cenários propostos no dataset de testes do Harness.
+* **[Q-009] Perfis de Cenários para Validação Conceitual:**
+  * *Pergunta:* Quais cenários de uso específicos devem ser considerados na validação da ideia do sistema? Proponho validar 5 cenários básicos em active_spec.md: (1) Iniciante sem equipamentos com dor aguda no punho (nível 4); (2) Intermediário focado em Push/Pull com barra e paralelas; (3) Reabilitação de ombro (nível 2) e lombar (nível 1); (4) Usuário com consistência semanal baixa (volume reduzido); (5) Avançado com foco em pernas (pistol squat). Está de acordo com essa cobertura de cenários?
+  * *Resposta/Decisão:* Aprovado pelo usuário para cobrir os 5 cenários propostos de comportamento de usuário na modelagem da ideia.
   * *Status:* `[x] Respondida`
 
-* **[Q-010] Critérios de Aceitação Binários (Asserções de Teste do Harness):**
-  * *Pergunta:* Concorda com as seguintes regras de validação programática (Passa/Não Passa)? (1) Dor articular > 2 bloqueia exercícios agressores; (2) Proporção Push vs. Pull em treinos Fullbody entre 0.8 e 1.2; (3) Baixa consistência semanal impede propostas de progressão de nível. Está aprovado?
-  * *Resposta/Decisão:* Aprovado pelo usuário para as 3 regras de asserção lógica binárias do Harness de teste.
+* **[Q-010] Regras de Validação de Segurança e Consistência (Critérios de Aceitação):**
+  * *Pergunta:* Concorda com as seguintes regras de validação funcional? (1) Dor articular > 2 bloqueia exercícios agressores; (2) Proporção Push vs. Pull em treinos Fullbody entre 0.8 e 1.2; (3) Baixa consistência semanal impede propostas de progressão de nível. Está aprovado?
+  * *Resposta/Decisão:* Aprovado pelo usuário para as 3 regras lógicas de segurança e consistência que serão usadas como critérios de aceitação funcionais.
   * *Status:* `[x] Respondida`
 
-* **[Q-007] Formato do Mapeamento de Dores Articulares no Schema de Entrada:**
-  * *Pergunta:* Para as restrições articulares no JSON Schema de entrada, prefere um formato simples contendo apenas a lista de articulações afetadas (ex: `["wrist", "shoulder"]`) ou um mapeamento estruturado com nível de intensidade/dor de 1 a 5 (ex: `{"wrist": 3, "shoulder": 1}`)?
-  * *Resposta/Decisão:* O usuário escolheu a Opção 2 (Mapeamento com Intensidade de 1 a 5) por ser mais rico para aplicar regras de reabilitação.
+* **[Q-007] Formato de Coleta de Relatos de Dores Articulares:**
+  * *Pergunta:* Para as restrições articulares relatadas pelo usuário, prefere um formato simples contendo apenas a lista de articulações afetadas (ex: punho, ombro) ou um mapeamento estruturado com nível de intensidade/dor de 1 a 5 (onde 1 é leve e 5 é dor forte)?
+  * *Resposta/Decisão:* O usuário escolheu a escala de intensidade de 1 a 5 por ser mais rica para aplicar regras personalizadas de reabilitação.
   * *Status:* `[x] Respondida`
 
-* **[Q-008] Variações e Alternativas no Schema de Treino (Saída):**
-  * *Pergunta:* A estrutura de treino gerada pela IA (saída) deve conter alternativas pré-computadas para cada exercício (ex: caso um equipamento esteja ocupado ou o usuário prefira mudar na hora do treino) ou prefere que a saída seja linear e qualquer troca seja processada dinamicamente via chat?
-  * *Resposta/Decisão:* O usuário prefere que a estrutura de saída do treino seja linear, e que qualquer alteração seja negociada e ajustada de forma dinâmica através do chat.
+* **[Q-008] Variações e Alternativas na Rotina de Treino:**
+  * *Pergunta:* A rotina de treinos exibida na interface para o usuário deve conter alternativas pré-computadas para cada exercício (ex: caso um equipamento esteja ocupado ou o usuário prefira mudar na hora do treino) ou prefere que a rotina mostrada seja linear e qualquer troca de exercício seja decidida e ajustada de forma dinâmica conversando com o assistente?
+  * *Resposta/Decisão:* O usuário prefere que a rotina de treinos gerada inicialmente seja linear, e que qualquer alteração ou substituição de exercício seja negociada e ajustada dinamicamente através do chat.
   * *Status:* `[x] Respondida`
 
 * **[Q-001] Regras de Sobrecarga Progressiva e Adaptação:**
