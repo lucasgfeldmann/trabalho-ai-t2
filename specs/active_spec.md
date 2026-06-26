@@ -33,6 +33,17 @@ A solução atende a dois perfis principais de praticantes de calistenia, estabe
   * *Fase de Reestabelecimento:* Inclusão de exercícios educativos leves e de mobilidade para restabelecer o movimento de forma progressiva.
   * *Fase de Recuperação:* Validação do estado de dor após alguns dias; se recuperado, o exercício original volta ao plano de forma progressiva.
 
+### 4. Massa Crítica de Dados (Estado Mínimo Viável)
+Para que o gerador de treinos do CaliForge possa rodar sem gerar rotinas inseguras ou incompatíveis, a IA deve obter obrigatoriamente as seguintes quatro categorias de variáveis (Massa Crítica) no fluxo inicial:
+1. **Dados de Identificação e Biometria Básica:** Nome, idade, altura e peso (dados essenciais para entender a sobrecarga articular e o biotipo corporal do usuário na calistenia).
+2. **Histórico de Saúde e Limitações Físicas:**
+   - Mapeamento explícito de presença ou ausência de dores articulares (punho, ombro, cotovelo, joelho, lombar).
+   - Mapeamento de problemas de mobilidade, deficiências ou restrições médicas gerais de saúde.
+3. **Mapeamento de Nível Físico por Teste Prático Guiado:**
+   - Se o usuário souber informar, registra-se os parâmetros de exercícios de calistenia que ele já consegue executar.
+   - Se o usuário for iniciante ou não souber informar, a IA prescreve um **Teste Físico Conversacional**: instrui o usuário a realizar um exercício básico (ex: flexões no chão ou agachamentos simples). Com base no feedback de repetições e dificuldade relatado pelo usuário, a IA aumenta ou diminui progressivamente o nível dos movimentos sugeridos até mapear com exatidão a faixa de força inicial.
+4. **Disponibilidade de Equipamentos:** Acesso a barras fixas, barras paralelas ou elásticos (se indisponível, assume fallback de peso corporal puro).
+
 ---
 
 ## 🚦 Checklist de Validação da Etapa 1
@@ -40,6 +51,7 @@ A solução atende a dois perfis principais de praticantes de calistenia, estabe
 - [x] **Item 1:** Personas do usuário bem definidas e validadas.
 - [x] **Item 2:** Escopo de recursos (Geração de Treino, Progressão, Acompanhamento) detalhado e sem ambiguidades.
 - [x] **Item 3:** Mapeamento de equipamentos e restrições acordado.
+- [x] **Item 4:** Massa Crítica de Dados (Estado Mínimo Viável) e fluxo de teste físico dinâmico definidos formalmente.
 
 ---
 
@@ -109,9 +121,24 @@ Este esquema define as informações do usuário enviadas ao modelo para gerar a
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CaliForgeUserInput",
   "type": "object",
-  "required": ["userId", "experienceLevel", "movementLevels", "painState", "equipmentAvailability"],
+  "required": ["userId", "name", "age", "height", "weight", "healthConditions"],
   "properties": {
     "userId": { "type": "string" },
+    "name": { "type": "string" },
+    "age": { "type": "integer", "minimum": 1, "maximum": 120 },
+    "height": { "type": "number", "minimum": 0.5, "maximum": 2.5, "description": "Altura em metros (ex: 1.75)" },
+    "weight": { "type": "number", "minimum": 10, "maximum": 300, "description": "Peso em kg (ex: 72.5)" },
+    "healthConditions": {
+      "type": "object",
+      "required": ["hasMobilityIssues", "hasHealthRestrictions"],
+      "properties": {
+        "hasMobilityIssues": { "type": "boolean" },
+        "mobilityDetails": { "type": "string", "description": "Detalhes caso existam problemas de mobilidade ou deficiências" },
+        "hasHealthRestrictions": { "type": "boolean" },
+        "healthRestrictionsDetails": { "type": "string", "description": "Detalhes de restrições de saúde gerais ou médicas" }
+      },
+      "additionalProperties": false
+    },
     "experienceLevel": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
     "movementLevels": {
       "type": "object",
@@ -155,7 +182,19 @@ Este esquema define as informações do usuário enviadas ao modelo para gerar a
 }
 ```
 
-### 2. JSON Schema de Saída (Generated Workout Output)
+### 2. Valores Padrão Seguros (Fallbacks de Dados Incompletos)
+Quando dados opcionais do perfil não forem fornecidos no JSON de entrada durante o fluxo de onboarding progressivo, o sistema aplicará os seguintes fallbacks:
+
+| Campo Opcional | Descrição | Valor Padrão Seguro (Fallback) |
+| :--- | :--- | :--- |
+| `experienceLevel` | Nível geral do usuário | `"beginner"` |
+| `movementLevels` | Nível em cada eixo de exercícios | Nível `1` em todos os eixos (`push: 1`, `pull: 1`, `legs: 1`, `abs: 1`) |
+| `painState` | Dores localizadas nas articulações | `0` (sem dor ativa) em todas as articulações |
+| `equipmentAvailability` | Equipamentos de calistenia | `false` em todos (bodyweight puro no chão) |
+| `weeklyConsistency` | Consistência e meta de treinos | `completedWorkoutsThisWeek: 0` e `targetWorkoutsPerWeek: 3` |
+
+
+### 3. JSON Schema de Saída (Generated Workout Output)
 Este esquema define a estrutura estrita de treino gerada e retornada pela IA:
 
 ```json
@@ -201,10 +240,18 @@ Este esquema define a estrutura estrita de treino gerada e retornada pela IA:
 }
 ```
 
+### 4. Ciclo de Vida e Decaimento de Dados Temporais (Dores Articulares)
+Para garantir que as restrições físicas reflitam a recuperação biológica real do usuário, o estado de dores articulares (`painState`) segue regras rígidas de expiração e decaimento temporal:
+1. **Janela de Validade (TTL - Time to Live) do Relato:** Qualquer relato de dor articular (intensidade entre 1 e 5) é considerado ativo por uma janela padrão de **7 dias** a partir do timestamp do último check-in onde a dor foi mencionada.
+2. **Regra de Decaimento por Tempo (Inatividade):** Se o usuário ficar **7 dias corridos de calendário sem registrar novos relatos** da articulação afetada, o sistema aplica um decaimento linear automático: a intensidade da dor é reduzida em **1 nível** a cada 7 dias (ex: de intensidade 4 para 3). Ao atingir 0, o bloqueio articular é removido.
+3. **Gatilho de Reavaliação no Check-in (Conversa Ativa):** A cada **3 sessões de treino concluídas** sob o regime de dor em uma articulação, a IA deve disparar uma pergunta de reavaliação no chat de check-in (ex: *"Como está o seu punho hoje?"*). O feedback subjetivo do usuário atualiza imediatamente a intensidade da dor no banco de dados (redefinindo o valor ou zerando-o se recuperado), reiniciando o ciclo de expiração.
+
 ### 🚦 Checklist de Validação da Etapa 4
 - [x] **Item 1:** Esquema JSON de entrada validado para suportar restrições articulares e preferências do usuário.
 - [x] **Item 2:** Esquema JSON de saída estruturado com faixas de repetições flexíveis e campos específicos para mensagens de reabilitação.
 - [x] **Item 3:** Contrato verificado contra todos os cenários das personas (Iniciante sem equipamentos vs. Intermediário).
+- [x] **Item 4:** Mapeamento e documentação de valores padrões seguros (fallbacks) para todos os parâmetros de dados opcionais ou incompletos.
+- [x] **Item 5:** Definição do ciclo de vida, expiração e regras de decaimento para variáveis mutáveis ou dependentes do tempo (dados temporais).
 
 ---
 

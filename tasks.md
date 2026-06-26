@@ -28,7 +28,20 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
 
 * **[x] [TSK-004] Discussão do IMP-004 (Contratos de Dados Dinâmicos):**
   * *Descrição:* Debater e decidir sobre a exigência de histórico temporal e metadados de dor nos schemas de entrada/saída para reabilitação articular.
-  * *Status:* `🟢 Concluído`
+  * *Status:* 🟢 Concluído
+
+### 🔍 Revisão e Ajuste do active_spec.md (CaliForge)
+* **[x] [TSK-005] Ajuste da Etapa 1 (Massa Crítica de Dados):**
+  * *Descrição:* Definir formalmente a Massa Crítica de Dados obrigatória na Etapa 1 para o onboarding conversacional do CaliForge e atualizar o checklist.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-006] Ajuste da Etapa 4 (Fallbacks de Dados Incompletos):**
+  * *Descrição:* Documentar os valores padrões seguros (fallbacks) e ajustar os esquemas JSON de entrada/saída na Etapa 4 para aceitar dados parciais.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-007] Ajuste da Etapa 4 (Ciclo de Vida de Dados Temporais):**
+  * *Descrição:* Mapear a validade temporal (TTL) e regras de decaimento de dores no esquema e contratos da Etapa 4.
+  * *Status:* 🟢 Concluído
 
 ---
 
@@ -45,5 +58,17 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
 
 * **[TSK-004] Discussão do IMP-004 (Contratos de Dados Dinâmicos):**
   * *Decisão:* Incluída a regra obrigatória na Etapa 4 de `lifecycle.md` exigindo a modelagem do Ciclo de Vida do Dado para quaisquer parâmetros de dados temporais ou dinamicamente mutáveis, definindo janelas de validade (TTL) e regras de decaimento/exclusão.
+
+* **[TSK-005] Ajuste da Etapa 1 (Massa Crítica de Dados):**
+  * *Decisão:* Adicionada a definição formal de Massa Crítica de Dados (Identificação, Biometria, Equipamentos, Saúde/Dores/Mobilidade e Nível Físico por Teste Prático Guiado) na Etapa 1 de `active_spec.md`, alinhada com as exigências de onboarding conversacional gradual.
+
+* **[TSK-006] Ajuste da Etapa 4 (Fallbacks de Dados Incompletos):**
+  * *Decisão:* Ajustado o JSON Schema de entrada (`CaliForgeUserInput`) em `active_spec.md` para exigir apenas a biometria/saúde obrigatória e adicionada uma tabela detalhada com valores padrão seguros (fallbacks) para todos os dados opcionais ausentes no onboarding.
+
+* **[TSK-007] Ajuste da Etapa 4 (Ciclo de Vida de Dados Temporais):**
+  * *Decisão:* Adicionado o detalhamento do Ciclo de Vida e Decaimento de Dores Articulares na Etapa 4 de `active_spec.md`. Ele estabelece validade padrão de 7 dias (TTL), decaimento de 1 nível de dor a cada 7 dias de inatividade de relatos e gatilho de reavaliação no chat a cada 3 sessões de treino concluídas.
+
+
+
 
 
