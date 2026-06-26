@@ -1,6 +1,9 @@
 # Ciclo de Vida da Especificação (Spec Lifecycle)
 
-Este documento define o processo estruturado e as etapas de validação pelas quais a especificação da nossa solução de calistenia passará. O desenvolvimento é orientado por etapas sequenciais com loops de verificação.
+Este documento define o processo estruturado e as etapas de validação pelas quais o ciclo de vida de qualquer especificação passará. Usamos a especificação da calistenia (CaliForge) como o nosso caso de uso de referência para estruturar este framework.
+
+> [!IMPORTANT]
+> **Regra de Código de Produção Zero no Repositório:** Por ser um repositório focado puramente em infraestrutura de processo e design do ciclo de vida das especificações (Spec Engine), **nenhum código de produção operável (código-fonte de aplicativos, componentes ou lógica de frontend/backend) será escrito aqui**. Em projetos reais que utilizarem este framework via Skill, a codificação é proibida até que a especificação atinja a aprovação no Harness.
 
 ---
 
@@ -17,6 +20,9 @@ graph LR
 ```
 
 Uma etapa só é considerada **concluída** quando todos os itens do seu checklist forem validados e aprovados pelo usuário.
+
+> [!IMPORTANT]
+> **Bloqueio por Perguntas Pendentes:** Nenhum item de checklist pode ser marcado como concluído e nenhuma passagem de etapa pode ser autorizada se houver perguntas correspondentes ativas e pendentes no tracker local **[questions.md](file:///home/lucas/github/trabalho-ai-t2/specs/questions.md)**. A IA é estritamente proibida de assumir premissas ou dar por respondidas questões sem a manifestação inequívoca do usuário.
 
 ---
 
