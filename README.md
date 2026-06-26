@@ -1,3 +1,8 @@
+# Projeto descontinuado por prazo...
+
+Aqui se encontra o início da ideia em que estava testando o funcionamento da delimitação e, quando identificado o desvio ou a falta de compreensão da IA, aí realizar uma ação para tentar mitigar essa falha.
+Alem disso se teve a ideia de ela ir auto avaliando e analisando os arquivos para um refoço supervisionado a partir da iteração realizada.
+
 # CaliForge - Assistente Inteligente de Calistenia
 
 Este repositório contém o projeto de Inteligência Artificial da G2 para a disciplina de IA 2. O objetivo é desenvolver um assistente inteligente focado na prática de calistenia, utilizando as metodologias de **Spec-Driven Development (SDD)** e **Harness Engineering**.
