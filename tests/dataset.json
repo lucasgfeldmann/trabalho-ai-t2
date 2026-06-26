@@ -1,0 +1,223 @@
+{
+  "testCases": [
+    {
+      "caseId": "CT-001",
+      "name": "Iniciante + Dor Aguda + Sem Equipamentos",
+      "input": {
+        "userId": "usr_001",
+        "name": "Pedro",
+        "age": 24,
+        "height": 1.75,
+        "weight": 70.0,
+        "healthConditions": {
+          "hasMobilityIssues": false,
+          "hasHealthRestrictions": false
+        },
+        "experienceLevel": "beginner",
+        "movementLevels": {
+          "push": 1,
+          "pull": 1,
+          "legs": 1,
+          "abs": 1
+        },
+        "painState": {
+          "wrist": 4,
+          "shoulder": 0,
+          "elbow": 0,
+          "knee": 0,
+          "lowerBack": 0
+        },
+        "equipmentAvailability": {
+          "hasPullUpBar": false,
+          "hasParallelBars": false,
+          "hasResistanceBands": false
+        },
+        "weeklyConsistency": {
+          "completedWorkoutsThisWeek": 0,
+          "targetWorkoutsPerWeek": 3
+        }
+      },
+      "expected": {
+        "forbiddenExerciseKeywords": ["flexao_tradicional", "dips", "flexao_diamante"],
+        "recommendedCategories": ["legs", "abs"],
+        "minExercises": 2
+      }
+    },
+    {
+      "caseId": "CT-002",
+      "name": "Intermediário + Equipamentos Completos + Alta Performance",
+      "input": {
+        "userId": "usr_002",
+        "name": "Mariana",
+        "age": 28,
+        "height": 1.65,
+        "weight": 58.0,
+        "healthConditions": {
+          "hasMobilityIssues": false,
+          "hasHealthRestrictions": false
+        },
+        "experienceLevel": "intermediate",
+        "movementLevels": {
+          "push": 5,
+          "pull": 4,
+          "legs": 3,
+          "abs": 3
+        },
+        "painState": {
+          "wrist": 0,
+          "shoulder": 0,
+          "elbow": 0,
+          "knee": 0,
+          "lowerBack": 0
+        },
+        "equipmentAvailability": {
+          "hasPullUpBar": true,
+          "hasParallelBars": true,
+          "hasResistanceBands": true
+        },
+        "weeklyConsistency": {
+          "completedWorkoutsThisWeek": 3,
+          "targetWorkoutsPerWeek": 4
+        }
+      },
+      "expected": {
+        "requiredExerciseKeywords": ["barra_fixa", "dips"],
+        "minExercises": 3
+      }
+    },
+    {
+      "caseId": "CT-003",
+      "name": "Reabilitação Articular Múltipla + Sem Equipamentos",
+      "input": {
+        "userId": "usr_003",
+        "name": "Carlos",
+        "age": 35,
+        "height": 1.80,
+        "weight": 85.0,
+        "healthConditions": {
+          "hasMobilityIssues": true,
+          "mobilityDetails": "Falta de mobilidade de ombros",
+          "hasHealthRestrictions": false
+        },
+        "experienceLevel": "intermediate",
+        "movementLevels": {
+          "push": 3,
+          "pull": 3,
+          "legs": 3,
+          "abs": 3
+        },
+        "painState": {
+          "wrist": 0,
+          "shoulder": 2,
+          "elbow": 0,
+          "knee": 0,
+          "lowerBack": 1
+        },
+        "equipmentAvailability": {
+          "hasPullUpBar": false,
+          "hasParallelBars": false,
+          "hasResistanceBands": false
+        },
+        "weeklyConsistency": {
+          "completedWorkoutsThisWeek": 2,
+          "targetWorkoutsPerWeek": 3
+        }
+      },
+      "expected": {
+        "forbiddenExerciseKeywords": ["dips", "flexao_arqueiro"],
+        "requiredRecoveryKeywords": ["mobilidade", "ombro"],
+        "minExercises": 2
+      }
+    },
+    {
+      "caseId": "CT-004",
+      "name": "Baixa Consistência + Treino Regenerativo",
+      "input": {
+        "userId": "usr_004",
+        "name": "Ana",
+        "age": 30,
+        "height": 1.70,
+        "weight": 65.0,
+        "healthConditions": {
+          "hasMobilityIssues": false,
+          "hasHealthRestrictions": false
+        },
+        "experienceLevel": "intermediate",
+        "movementLevels": {
+          "push": 4,
+          "pull": 3,
+          "legs": 3,
+          "abs": 3
+        },
+        "painState": {
+          "wrist": 0,
+          "shoulder": 0,
+          "elbow": 0,
+          "knee": 0,
+          "lowerBack": 0
+        },
+        "equipmentAvailability": {
+          "hasPullUpBar": true,
+          "hasParallelBars": false,
+          "hasResistanceBands": false
+        },
+        "weeklyConsistency": {
+          "completedWorkoutsThisWeek": 1,
+          "targetWorkoutsPerWeek": 4
+        }
+      },
+      "expected": {
+        "maxLevelPerCategory": {
+          "push": 4,
+          "pull": 3,
+          "legs": 3,
+          "abs": 3
+        },
+        "minExercises": 2
+      }
+    },
+    {
+      "caseId": "CT-005",
+      "name": "Avançado + Foco em Pernas",
+      "input": {
+        "userId": "usr_005",
+        "name": "Bruno",
+        "age": 27,
+        "height": 1.78,
+        "weight": 76.0,
+        "healthConditions": {
+          "hasMobilityIssues": false,
+          "hasHealthRestrictions": false
+        },
+        "experienceLevel": "advanced",
+        "movementLevels": {
+          "push": 6,
+          "pull": 5,
+          "legs": 5,
+          "abs": 4
+        },
+        "painState": {
+          "wrist": 0,
+          "shoulder": 0,
+          "elbow": 0,
+          "knee": 0,
+          "lowerBack": 0
+        },
+        "equipmentAvailability": {
+          "hasPullUpBar": true,
+          "hasParallelBars": true,
+          "hasResistanceBands": true
+        },
+        "weeklyConsistency": {
+          "completedWorkoutsThisWeek": 4,
+          "targetWorkoutsPerWeek": 5
+        }
+      },
+      "expected": {
+        "requiredExerciseKeywords": ["agachamento_pistola"],
+        "requiredCategories": ["push", "pull", "legs", "abs"],
+        "minExercises": 4
+      }
+    }
+  ]
+}

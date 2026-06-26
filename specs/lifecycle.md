@@ -85,3 +85,13 @@ Para evitar o crescimento descontrolado das especificações (token bloat) e gar
   - [ ] Dataset com pelo menos 5 cenários diversos de usuários.
   - [ ] Critérios de avaliação objetivos (ex: segurança, volume de treino, formato).
   - [ ] Lógica de asserção para o script de avaliação.
+
+---
+
+## 🎁 Entregáveis Finais de Engenharia (Output de Desenvolvimento)
+
+Ao concluir com sucesso a **Etapa 5** (Asserções de testes verdes no Harness), a especificação é considerada finalizada. O framework autoriza e exige que a IA crie e popule os seguintes documentos técnicos de entrega sob o diretório [specs/output/](file:///home/lucas/github/trabalho-ai-t2/specs/output/):
+
+1. **[projeto.md](file:///home/lucas/github/trabalho-ai-t2/specs/output/projeto.md):** Contém a especificação geral do produto, incluindo a descrição do problema a ser resolvido, objetivos principais, restrições e escopo macro.
+2. **[requisitos.md](file:///home/lucas/github/trabalho-ai-t2/specs/output/requisitos.md):** Contém a lista estruturada e detalhada de todos os requisitos funcionais (RFs) e não-funcionais (RNFs) mapeados na especificação.
+3. **[criterios-aceite.md](file:///home/lucas/github/trabalho-ai-t2/specs/output/criterios-aceite.md):** Contém a descrição detalhada de todos os critérios de aceitação e testes manuais/automatizados a serem executados para validar o produto.

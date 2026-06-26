@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CaliForgeUserInput",
+  "type": "object",
+  "required": ["userId", "name", "age", "height", "weight", "healthConditions"],
+  "properties": {
+    "userId": { "type": "string" },
+    "name": { "type": "string" },
+    "age": { "type": "integer", "minimum": 1, "maximum": 120 },
+    "height": { "type": "number", "minimum": 0.5, "maximum": 2.5, "description": "Altura em metros (ex: 1.75)" },
+    "weight": { "type": "number", "minimum": 10, "maximum": 300, "description": "Peso em kg (ex: 72.5)" },
+    "healthConditions": {
+      "type": "object",
+      "required": ["hasMobilityIssues", "hasHealthRestrictions"],
+      "properties": {
+        "hasMobilityIssues": { "type": "boolean" },
+        "mobilityDetails": { "type": "string", "description": "Detalhes caso existam problemas de mobilidade ou deficiências" },
+        "hasHealthRestrictions": { "type": "boolean" },
+        "healthRestrictionsDetails": { "type": "string", "description": "Detalhes de restrições de saúde gerais ou médicas" }
+      },
+      "additionalProperties": false
+    },
+    "experienceLevel": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+    "movementLevels": {
+      "type": "object",
+      "required": ["push", "pull", "legs", "abs"],
+      "properties": {
+        "push": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "pull": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "legs": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "abs": { "type": "integer", "minimum": 1, "maximum": 6 }
+      }
+    },
+    "painState": {
+      "type": "object",
+      "description": "Estado de dor ativa e intensidade relatada pelo usuário por articulação",
+      "properties": {
+        "wrist": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "shoulder": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "elbow": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "knee": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "lowerBack": { "type": "integer", "minimum": 0, "maximum": 5 }
+      },
+      "additionalProperties": false
+    },
+    "equipmentAvailability": {
+      "type": "object",
+      "required": ["hasPullUpBar", "hasParallelBars", "hasResistanceBands"],
+      "properties": {
+        "hasPullUpBar": { "type": "boolean" },
+        "hasParallelBars": { "type": "boolean" },
+        "hasResistanceBands": { "type": "boolean" }
+      }
+    },
+    "weeklyConsistency": {
+      "type": "object",
+      "properties": {
+        "completedWorkoutsThisWeek": { "type": "integer", "minimum": 0 },
+        "targetWorkoutsPerWeek": { "type": "integer", "minimum": 1, "maximum": 7 }
+      }
+    }
+  }
+}

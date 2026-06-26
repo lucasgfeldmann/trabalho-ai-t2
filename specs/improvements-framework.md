@@ -40,6 +40,13 @@ A lógica operacional funciona como um loop de feedback:
   * *Ocorrências:* 1
   * *Status:* 🟢 Consolidado no Lifecycle.
 
+### 5. Portabilidade e Autonomia do Harness (Etapa 5 - Testes)
+* **[IMP-005] Resiliência e Portabilidade de Scripts do Harness:**
+  * *Descrição:* Estabelecer que os scripts de teste do Harness na Etapa 5 devem ser autônomos e resilientes. Se dependerem de bibliotecas externas (ex: `jsonschema`), devem prever fallbacks nativos (Python puro) para validação estrutural básica, garantindo que as asserções de negócio rodem mesmo em ambientes restritos de CI/CD.
+  * *Impacto:* Portabilidade do Harness e garantia de execução resiliente dos testes.
+  * *Ocorrências:* 1
+  * *Status:* 🟡 Pendente
+
 ---
 
 ## ⚙️ Instruções Locais para o Agente de Specs

@@ -43,6 +43,32 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
   * *Descrição:* Mapear a validade temporal (TTL) e regras de decaimento de dores no esquema e contratos da Etapa 4.
   * *Status:* 🟢 Concluído
 
+### 📂 Geração de Documentos de Entrega Pós-Lifecycle
+* **[x] [TSK-008] Regras de Portão no Lifecycle e README:**
+  * *Descrição:* Adicionar no README.md e lifecycle.md a regra de liberação de arquivos pós-lifecycle. Definir como local de saída o diretório `specs/output/`.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-009] Definição dos Modelos/Templates dos 3 Arquivos:**
+  * *Descrição:* Desenhar os templates de estrutura para os arquivos projeto.md, requisitos.md e criterios-aceite.md.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-010] Geração e Preenchimento dos Entregáveis do CaliForge:**
+  * *Descrição:* Criar e popular specs/output/projeto.md, specs/output/requisitos.md e specs/output/criterios-aceite.md para o CaliForge.
+  * *Status:* 🟢 Concluído
+
+### 🧪 Desenvolvimento do Harness de Testes (Harness Engineering)
+* **[x] [TSK-011] Criação do diretório de testes e arquitetura do Harness:**
+  * *Descrição:* Criar a pasta `tests/` na raiz do projeto e estruturar a arquitetura do executor de testes (como os arquivos serão organizados e executados).
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-012] Implementação do Dataset e Validação de Schemas:**
+  * *Descrição:* Criar o dataset JSON (`tests/dataset.json`) contendo os 5 perfis de teste e implementar a validação dos JSON Schemas de entrada e saída.
+  * *Status:* 🟢 Concluído
+
+* **[x] [TSK-013] Implementação do Script do Harness (test_harness.py):**
+  * *Descrição:* Desenvolver o script de teste (`tests/test_harness.py`) contendo a lógica de validação automatizada e as asserções de qualidade do CaliForge (CA-001 a CA-004).
+  * *Status:* 🟢 Concluído
+
 ---
 
 ## 📜 Histórico de Tarefas Concluídas
@@ -67,6 +93,30 @@ Este arquivo é um mecanismo de governança de processo global da workspace. Ele
 
 * **[TSK-007] Ajuste da Etapa 4 (Ciclo de Vida de Dados Temporais):**
   * *Decisão:* Adicionado o detalhamento do Ciclo de Vida e Decaimento de Dores Articulares na Etapa 4 de `active_spec.md`. Ele estabelece validade padrão de 7 dias (TTL), decaimento de 1 nível de dor a cada 7 dias de inatividade de relatos e gatilho de reavaliação no chat a cada 3 sessões de treino concluídas.
+
+* **[TSK-008] Regras de Portão no Lifecycle e README:**
+  * *Decisão:* Adicionada a regra de portão em `specs/README.md` e a seção "Entregáveis Finais de Engenharia" em `specs/lifecycle.md`, proibindo a geração de `projeto.md`, `requisitos.md` e `criterios-aceite.md` antes da aprovação final (Etapa 5) e definindo a subpasta `specs/output/` como destino oficial.
+
+* **[TSK-009] Definição dos Modelos/Templates dos 3 Arquivos:**
+  * *Decisão:* Aprovados e desenhados os templates em Markdown estruturado para `projeto.md` (visão, problema, metas e escopo), `requisitos.md` (RFs e RNFs detalhados) e `criterios-aceite.md` (casos de teste em JSON e asserções binárias do Harness).
+
+* **[TSK-010] Geração e Preenchimento dos Entregáveis do CaliForge:**
+  * *Decisão:* Criados e preenchidos os arquivos de entrega pós-lifecycle para o CaliForge sob o diretório `specs/output/`: `projeto.md` (Visão geral, objetivos, restrições e personas), `requisitos.md` (Requisitos funcionais, regras de negócio e não-funcionais) e `criterios-aceite.md` (Dataset de teste de 5 cenários com JSON e as 5 asserções lógicas para o Harness).
+
+* **[TSK-011] Criação do diretório de testes e arquitetura do Harness:**
+  * *Decisão:* Criado o diretório `tests/` na raiz e adotada a arquitetura modular e desacoplada (Opção 1): schemas separados em subpasta, dados no formato JSON (`tests/dataset.json`) e lógica de testes encapsulada in `tests/test_harness.py`.
+
+* **[TSK-012] Implementação do Dataset e Validação de Schemas:**
+  * *Decisão:* Criados e validados os arquivos JSON Schemas (`tests/schemas/CaliForgeUserInput.json` e `tests/schemas/CaliForgeWorkoutOutput.json`) e o dataset com os 5 casos de teste completos no arquivo `tests/dataset.json`.
+
+* **[TSK-013] Implementação do Script do Harness (test_harness.py):**
+  * *Decisão:* Desenvolvido o script `tests/test_harness.py` contendo a validação de JSON Schemas (com fallback resiliente sem bibliotecas externas) e a checagem das 4 asserções de segurança/consistência. Testes executados com sucesso e obtido status final 5/5 Verde ("TUDO VERDE").
+
+
+
+
+
+
 
 
 
